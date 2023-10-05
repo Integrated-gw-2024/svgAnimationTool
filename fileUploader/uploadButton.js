@@ -3,7 +3,6 @@ class UploadButton {
     constructor(ButtonWidth) {
         this.buttonWidth = ButtonWidth;
         this.buttonBoxElement = document.getElementById('newButtonBox');
-        console.log(this.buttonBoxElement);
         this.setButtonStyle();
         this.createElement();
         this.applyInitStyles();
@@ -99,6 +98,7 @@ class UploadButton {
         });
     }
 
+    //wrapperであるbutton要素がクリックされた時に、input要素のボタンを発火させている
     addClickEventListener() {
         this.new_buttonElement.addEventListener("click", () => {
                 this.new_inputElement.click();
