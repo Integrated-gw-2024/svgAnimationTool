@@ -75,6 +75,10 @@ export class SvgButton {
     })
   }
 
+  get svgLoader() {
+    return this.#svgLoader;
+  }
+
   /**
    * svgElementを読み込むクラス。
    * @param {string | svgLoaded} name -現状svgLoaded以外にイベントはありません。
