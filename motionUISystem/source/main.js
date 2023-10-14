@@ -16,5 +16,9 @@ function createUploadButton() {
 
     console.log(motionManager.getMotionData(0));
     console.log(motionManager.event);
+
+    this,tweakPaneManager.event.add("PARAMSInteracted", (PARAMS) => {
+        console.log(PARAMS);
+    });
 }
 
