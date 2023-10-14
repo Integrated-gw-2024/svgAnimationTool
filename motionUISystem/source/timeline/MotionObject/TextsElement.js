@@ -1,4 +1,4 @@
-import { Element } from "../../Element"
+import { Element } from "../../utility/Element"
 
 export class TextsElement{
     constructor(ParentElement_id, ClassName){

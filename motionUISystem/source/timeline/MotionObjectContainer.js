@@ -1,4 +1,4 @@
-import { Element } from "../Element";
+import { Element } from "../utility/Element";
 
 //MotionObjectをdivの中に入れたいので、htmlの階層のためだけに作ったクラス
 export class MotionObjectContainer {
