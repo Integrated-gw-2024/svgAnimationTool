@@ -1,9 +1,9 @@
-import { Element } from "./Element";
+import { Element } from "../Element";
 import { TimelineStyle } from "./TimelineStye";
 import { MotionObject } from "./MotionObject/MotionObject";
 import { MotionObjectContainer } from "./MotionObjectContainer";
 import { SetMotionObjectClassStyle } from "./MotionObject/SetMotionObjectClassStyle";
-import { EventListener } from "./eventListener/eventListener";
+import { EventListener } from "../eventListener/eventListener";
 
 export class Timeline {
     parentElementStyle;

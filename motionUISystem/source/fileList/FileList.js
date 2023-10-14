@@ -5,7 +5,7 @@
 import { SvgButton } from "./svgLoader";
 import { SvgCircleAnalyzer } from "./svgLoader";
 import { Uploader } from "./fileUploader/Uploader";
-import { Element } from "./Element";
+import { Element } from "../Element";
 import { SVGfile } from "./file/SVGFile";
 import { FileDivElements } from "./file/FileDivElements";
 import { FilesStyle } from "./file/FilesStyle";

@@ -1,5 +1,5 @@
-import { Element } from "../Element";
-import { EventListener } from "../eventListener/eventListener";
+import { Element } from "../../Element";
+import { EventListener } from "../../eventListener/eventListener";
 import { HandleElement } from "./HandleElement";
 import { TextsElement } from "./TextsElement";
 

@@ -1,5 +1,5 @@
-import { Element } from "../Element"
-import { EventListener } from "../eventListener/eventListener";
+import { Element } from "../../Element"
+import { EventListener } from "../../eventListener/eventListener";
 
 export class HandleElement {
     constructor(ParentElement_id, ClassName, ParentEvent) {

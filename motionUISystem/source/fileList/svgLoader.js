@@ -1,4 +1,4 @@
-import { EventListener } from './eventListener/eventListener'
+import { EventListener } from '../eventListener/eventListener'
 
 /**
    * svgElementを読み込むクラス。
