@@ -18,6 +18,7 @@ export class Timeline {
 
 
     constructor(ParentElement_id) {
+        console.log("qaaaaaaaaaaqaqqa");
         //タイムラインのstyleの設定
         this.parentElement_id = ParentElement_id;
         this.parentElementStyle = new TimelineStyle(this.parentElement_id);

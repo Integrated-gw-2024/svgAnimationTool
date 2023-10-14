@@ -83,9 +83,12 @@ export class MotionObject {
 
         //テキストを作成
         this.textsElement = new TextsElement(this.object.getDOMElement(), "motionObject_textElement");
+        this.textsElement.setText("duration", this.duration);
+        this.textsElement.setText("startFrame", this.startFrame);
+        this.textsElement.setText("endFrame", this.endFrame);
+        this.parentEvent.dispatch("motionObjectChanged");
         //ハンドルを生成
         this.handleElement = new HandleElement(this.object.getDOMElement(), "endHandle", this.event);
-        this.event.dispatch("interacted");
     }
 
     setMotionType(MotionType) {
@@ -165,7 +168,6 @@ export class MotionObject {
         this.startFrame = (MotionObjectRect.left - ParentRect.left + timeLineElement.scrollLeft) / this.frameRatio;
         this.endFrame = ((MotionObjectRect.right) - ParentRect.left + timeLineElement.scrollLeft) / this.frameRatio;
         this.duration = (this.endFrame + 1) - this.startFrame;
-        console.log(this.startFrame + " / " + this.endFrame + " / " + this.duration);
     }
 
     get frames() {

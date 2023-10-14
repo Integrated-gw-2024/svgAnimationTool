@@ -8,22 +8,24 @@ let timeline;
 window.onload = createUploadButton;
 
 function createUploadButton() {
-    console.log("ooo");
-    fileList = new FileList("fileList");
     timeline = new Timeline("timeline");
+    fileList = new FileList("fileList");
 
 
     //イベントリスナー
-    timeline.event("motionObjectChanged", () => {
+    timeline.event.add("motionObjectChanged", () => {
         //これはバーの時間を変更し終わった時に発行される
+        console.log("変更されましたよ");
     });
-    timeline.event("motionObjectClicked", () => {
+    timeline.event.add("motionObjectClicked", () => {
         //これはバーをクリックして選択した瞬間に発行される
+        console.log("今は " + timeline.getSelectedObjectNumber() + " 番目motionObjectを選択中だよ");
     })
 
     //これでmotionObjectを作れるよ。timeline.motionObjectsの中に配列でpushされる
-    timeline.pushMotionObject();
-
+    timeline.pushMotionObject(); 
+    timeline.pushMotionObject(); 
+    timeline.pushMotionObject(); 
     //ゲッター
     // console.log(timeline.getSelectedObjectNumber());
         //これは今どのバーが選択されているかを取り出せるintで帰ってくるよ
@@ -36,5 +38,7 @@ function createUploadButton() {
         //stringで入れると、現在選択しているmotionObjectの動きの表示を変更できるよ
     //setMotionObjectFrames(MotionObjectNum, StartFrame, EndFrame);
         //指定したmotionObjectの動きのframeパラメーターを変更できる。
+
+    
 }
 

@@ -19,7 +19,7 @@ export class TextsElement{
 
     setTextStyle(){
         this.styles = {
-            color: "#000000",
+            color: "#00FF00",
             userSelect: "none",
         };
         this.textElements.duration.setStyle(this.styles);
