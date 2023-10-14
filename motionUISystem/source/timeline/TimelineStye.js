@@ -22,6 +22,7 @@ export class TimelineStyle {
                     display: flex;
                     flex-direction: row;
                     overflow-x: scroll;
+                    user-select: none;
                 }`, 0);
     }
 }

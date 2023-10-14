@@ -12,7 +12,6 @@ export class Style{
     }
 
     createStyle(){
-        console.log(this.styles);
         this.styleElement = document.createElement('style');
         this.styleElement.textContent =this.styles;
         document.head.appendChild(this.styleElement);

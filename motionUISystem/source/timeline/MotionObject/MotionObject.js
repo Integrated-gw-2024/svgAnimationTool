@@ -86,7 +86,6 @@ export class MotionObject {
         this.textsElement.setText("duration", this.duration);
         this.textsElement.setText("startFrame", this.startFrame);
         this.textsElement.setText("endFrame", this.endFrame);
-        this.parentEvent.dispatch("motionObjectChanged");
         //ハンドルを生成
         this.handleElement = new HandleElement(this.object.getDOMElement(), "endHandle", this.event);
     }

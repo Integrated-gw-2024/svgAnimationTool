@@ -1,4 +1,4 @@
-import { Style } from "../Style";
+import { Style } from "../../utility/Style";
 
 export class SetMotionObjectClassStyle{
     constructor(){
