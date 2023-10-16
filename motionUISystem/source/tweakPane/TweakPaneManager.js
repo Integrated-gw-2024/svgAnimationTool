@@ -2,22 +2,16 @@ import { Pane } from "../tweakpane-4.0.1/tweakpane-4.0.1";
 import { EventListener } from "../eventListener/eventListener";
 
 export class TweakPaneManager {
+    isAppear;//boolean型で、paneが表示されているかどうかを示している。
+
     constructor() {
+        this.isAppear = false;
+
         this.PARAMS = {
             motionType: 'linear',
             endFrame: 100,
         };
         this.pane = new Pane();
-        this.pane.addBinding(this.PARAMS, 'motionType', {
-            options: {
-                linear: 'linear',
-                radomWalk: 'randomWalk',
-                easeInSine: 'easeInSine',
-                easeOutSine: 'easeOutSine',
-                easeInOutSine: 'easeInOutSine',
-            },
-        });
-        this.pane.addBinding(this.PARAMS, 'endFrame');
 
         //イベントリスナーの設定
         this.event = new EventListener();
@@ -29,6 +23,25 @@ export class TweakPaneManager {
         });
     }
 
+    addBindings(){
+        this.pane.addBinding(this.PARAMS, 'motionType', {
+            options: {
+                linear: 'linear',
+                radomWalk: 'randomWalk',
+                easeInSine: 'easeInSine',
+                easeOutSine: 'easeOutSine',
+                easeInOutSine: 'easeInOutSine',
+            },
+        });
+        this.pane.addBinding(this.PARAMS, 'endFrame');
+        this.isAppear = true;
+    }
+
+    dispose(){
+        this.pane.dispose();
+        this.isAppear = false;
+    }
+
     setData(newData) {
         for (let key in this.PARAMS) {//for...inでデータを順番に処理している
             if (newData.hasOwnProperty(key)) {//newDataにプロパティが設定してあれば
@@ -36,8 +49,12 @@ export class TweakPaneManager {
                 this.PARAMS[key] = newData[key];//そのプロパティを更新する
             }
         }
-        
+
         this.pane.refresh();
         this.event.dispatch("PARAMSRefreshed", this.PARAMS);
+    }
+
+    get isAppear(){
+        return this.isAppear;
     }
 }
