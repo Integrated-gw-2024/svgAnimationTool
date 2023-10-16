@@ -30,6 +30,4 @@ export class MotionManager{
     getMotionData(MotionNum){
         return this.motionData[MotionNum].data;
     }
-
-
 }

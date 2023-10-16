@@ -1,7 +1,6 @@
 import { MotionManager } from "./MotionManager";
 import { ControlManager } from "./ControlManager";
 import { FileList } from "./fileList/FileList";
-import { EventListener } from "./eventListener/eventListener";
 
 window.onload = motionUiSystem;
 
@@ -14,8 +13,11 @@ function motionUiSystem() {
     controlManager = new ControlManager();
     fileList = new FileList("fileList");
 
-    //fileListでsvgデータが二つアップロードされたら
     fileList.event.add("svgFileAdded",(svgFileLength) => {
+        if(svgFileLength == 1){
+            console.log("1個あげたよ");
+        }
+        //fileListでsvgデータが二つアップロードされたら
         if(svgFileLength == 2){
             let startSvgData = fileList.getSvgData(0);
             console.log(startSvgData);
@@ -26,20 +28,21 @@ function motionUiSystem() {
         }
     });
     //motionDataが変更された時に発火する
-    motionManager.event.add("dataUpdated", (updatedMotionObjectNum, PARAMS ) =>{
-        //渡されているupdatedMotionObjectNumは変更されたmotionDataの配列
+    motionManager.event.add("dataUpdated", (updatedMotionDataNum, PARAMS) =>{
+        //渡されているupdatedMotionDataNumは変更されたmotionDataの配列
         //PARAMSはそのmotionDataのもつデータが詰まっている
-
     });
     //motionDataが追加されたとき
-    motionManager.event.add("motionAdded", (NewPARAMS) => {
+    motionManager.event.add("motionAdded", (NewPARAMS) => {//ここのNewPARAMSは初期化した状態のnullが混ざっているので注意
         //timelineにmotionObjectを配置
         controlManager.addMotionObject(NewPARAMS.name);
     });
+
+    /*ここから下はUI同士の連絡とかそういうものなので無視していいよ*/
     //motionObjectが追加し終わったら
-    controlManager.event.add("motionObjectAdded", (newPARAMS, CurrentMotionObjectNum) => {
+    controlManager.event.add("motionObjectAdded", (NewPARAMS, CurrentMotionObjectNum) => {
         //motionDataにデータを更新
-        motionManager.updateMotionData(newPARAMS, CurrentMotionObjectNum);
+        motionManager.updateMotionData(NewPARAMS, CurrentMotionObjectNum);
     });
     //UIによってパラメーターが変化した時
     controlManager.event.add("parameterChanged",(SelectedData,PARAMS) =>{
