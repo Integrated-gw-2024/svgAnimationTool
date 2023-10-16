@@ -23,7 +23,7 @@ export class MotionManager{
     //motionDataを更新する
     updateMotionData(newData, MotionNum){
         this.motionData[MotionNum].data = newData;//今選択中のmotionDataの_dataを変更する
-        this.event.dispatch("dataUpdated");
+        this.event.dispatch("dataUpdated", MotionNum, this.motionData[MotionNum].data);
     }
 
     //motionDataを取得する
