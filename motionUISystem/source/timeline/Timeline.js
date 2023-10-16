@@ -41,8 +41,8 @@ export class Timeline {
     }
 
     //これでMotionObjectが増やせるよ
-    pushMotionObject() {
-        this.motionObjects.push(new MotionObject(this.motionObjectContainer_id, this.motionObjects.length, this.event));
+    pushMotionObject(ObjectName) {
+        this.motionObjects.push(new MotionObject(this.motionObjectContainer_id, this.motionObjects.length, this.event, ObjectName));
     }
     //これでMotionObjectのframe関連を設定できるよ
     setMotionObjectData(MotionObjectNum,PARAMS){

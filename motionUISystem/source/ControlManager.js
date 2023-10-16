@@ -34,8 +34,8 @@ export class ControlManager {
         });
     }
 
-    addMotionObject() {
-        this.timeline.pushMotionObject();
+    addMotionObject(ObjectName) {
+        this.timeline.pushMotionObject(ObjectName);
         this.event.dispatch("motionObjectAdded",
             this.timeline.getMotionObjectData(this.timeline.getMotionObjectLength() - 1),
             this.timeline.getMotionObjectLength() - 1);//最新の追加されたmotionObjectのPARAMSと、motionObjectのlengthを渡している

@@ -26,7 +26,7 @@ export class MotionObject {
     _data;
 
 
-    constructor(ParentELement_id, ObjectNumber, ParentEvent) {
+    constructor(ParentELement_id, ObjectNumber, ParentEvent, ObjectName) {
 
         this.parentELement_id = ParentELement_id;
         this.objectNumber = ObjectNumber;
@@ -39,6 +39,7 @@ export class MotionObject {
         this.currentMouseX = 0;
         this.mouseXDifference = 0;
         this.frameRatio = 2;//実際のpxとフレーム数の比率を調整している。
+        this.objectName = ObjectName;
 
         //データの設定
         this._data = {
@@ -91,6 +92,7 @@ export class MotionObject {
 
         //テキストを作成
         this.textsElement = new TextsElement(this.object.getDOMElement(), "motionObject_textElement");
+        this.textsElement.setText("name", this.objectName);
         this.textsElement.setText("duration", this._data.duration);
         this.textsElement.setText("startFrame", this._data.startFrame);
         this.textsElement.setText("endFrame", this._data.endFrame);

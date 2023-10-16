@@ -31,7 +31,7 @@ function main() {
     });
 
     motionManager.event.add("motionAdded", (NewPARAMS) => {
-        controlManager.addMotionObject();
+        controlManager.addMotionObject(NewPARAMS.name);
     });
     controlManager.event.add("motionObjectAdded", (newPARAMS, CurrentMotionObjectNum) => {
         motionManager.updateMotionData(newPARAMS, CurrentMotionObjectNum);

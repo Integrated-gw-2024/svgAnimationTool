@@ -8,6 +8,7 @@ export class TextsElement{
         this.textContainer = new Element(this.parentElement_id, "class", "MotionObject_textContainer", "div");
         this.textElement = new Element(this.textContainer.getDOMElement(), "class", this.className, "p");
         this.textElements = {
+            name: new Element(this.textContainer.getDOMElement(), "class", this.className, "p"),
             duration: new Element(this.textContainer.getDOMElement(), "class", this.className, "p"),
             startFrame: new Element(this.textContainer.getDOMElement(), "class", this.className, "p"),
             endFrame: new Element(this.textContainer.getDOMElement(), "class", this.className, "p"),
@@ -22,6 +23,7 @@ export class TextsElement{
             color: "#00FF00",
             userSelect: "none",
         };
+        this.textElements.name.setStyle(this.styles);
         this.textElements.duration.setStyle(this.styles);
         this.textElements.startFrame.setStyle(this.styles);
         this.textElements.endFrame.setStyle(this.styles);
