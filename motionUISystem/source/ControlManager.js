@@ -1,16 +1,13 @@
-import { FileList } from "./fileList/FileList";
 import { Timeline } from "./timeline/Timeline";
 import { TweakPaneManager } from "./tweakPane/TweakPaneManager";
 import { EventListener } from "./eventListener/eventListener";
 
 export class ControlManager {
-    fileList;
     timeline;
     selectedMotionData;//今何のデータを選択しているか
 
     constructor() {
         this.timeline = new Timeline("timeline");
-        this.fileList = new FileList("fileList");
         this.tweakPaneManager = new TweakPaneManager();
 
         //イベントリスナーの設定

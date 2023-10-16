@@ -10,6 +10,7 @@ import { SVGfile } from "./file/SVGFile";
 import { FileDivElements } from "./file/FileDivElements";
 import { FilesStyle } from "./file/FilesStyle";
 import { UploaderStyle } from "./fileUploader/UploaderStyle";
+import { EventListener } from "../eventListener/eventListener";
 
 
 
@@ -26,6 +27,8 @@ export class FileList {
 
         this.style = new FilesStyle();
         this.style2 = new UploaderStyle();
+        this.event = new EventListener();
+        this.event.add("svgFileAdded");//fileが追加されたら発火、現在のfileのlengthを渡す
 
         //wrapperを作る
         this.fileBox = new Element(this.parentElement, "id", "fileBox", "div");
@@ -41,6 +44,7 @@ export class FileList {
                 svgDate: new SVGfile(this.analyzer.getArray()),
                 div: new FileDivElements(this.fileBox.getDOMElement(), fileName)
             });
+            this.event.dispatch("svgFileAdded", this.files.length);
         });
     }
 

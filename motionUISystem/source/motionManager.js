@@ -7,15 +7,11 @@ import { EventListener } from "./eventListener/eventListener";
 export class MotionManager{
     motionData = [];
 
-
     constructor(){
         //イベントリスナーを設定
         this.event = new EventListener();
         this.event.add("dataUpdated");//データの更新が反映された時に発火
         this.event.add("motionAdded");//motionDataが追加された時に発火
-        document.addEventListener("keypress", () => {
-            this.addMotionData(this.motionData.length, "data1", "data2", 0,100,"testMotion");
-        });
     }
 
     //motionDataを追加する
