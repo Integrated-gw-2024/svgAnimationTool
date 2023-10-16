@@ -63,13 +63,11 @@ export class MotionObject {
         //イベントの設定
         this.event = new EventListener();
         this.event.add("startInteracted", () => {
-            console.log("動かし始めた");
             document.documentElement.style.cursor = "col-resize";//動かしてる時はカーソルの見た目を変える
             this.mouseXDifference = this.currentMouseX - this.initMouseX;
             this.initMouseX = this.mouseX;
         });
         this.event.add("interacted", () => {
-            console.log("動いた");
             document.documentElement.style.cursor = "auto";//カーソルの見た目を戻す
             this.mouseXDifference = this.floatToInt(this.currentMouseX - this.initMouseX);//最終的にframeRatioの倍数になる
             this.setObjectWidth(this.width + this.mouseXDifference);//初期値がframeRatioの倍数なら、新しいwidthもframeRatioの倍数

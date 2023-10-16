@@ -51,7 +51,6 @@ export class SvgButton {
   constructor(selector) {
     this.#eventListener = new EventListener();
 
-    console.log(selector);
     if (typeof selector === 'string') {
       this.inputElement = document.querySelector(selector);
     } else {

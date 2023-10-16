@@ -41,7 +41,7 @@ export class FileList {
             //ここでfileListにデータを保存する
             let fileName = this.inputButton.svgLoader.rawData.name;
             this.files.push({
-                svgDate: new SVGfile(this.analyzer.getArray()),
+                svgData: new SVGfile(this.analyzer.getArray(), fileName),
                 div: new FileDivElements(this.fileBox.getDOMElement(), fileName)
             });
             this.event.dispatch("svgFileAdded", this.files.length);
@@ -52,7 +52,7 @@ export class FileList {
         return this.files.length;
     }
     getSvgData(i) {
-        return this.files[i].svgData.getArray();
+        return this.files[i].svgData.data;
     }
 }
 

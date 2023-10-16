@@ -10,20 +10,21 @@ export class MotionData {
     motionType;
     motionPARAMS = {};
 
-    constructor(Name, StartSvgData, EndSvgData, StartFrame, EndFrame, MotionType) {
+    constructor(Name, StartSvgData, EndSvgData) {
         //初期化
         this._data = {
             name: Name,
             startSvgData: StartSvgData,
             endSvgData: EndSvgData,
-            startFrame: StartFrame,
-            endFrame: EndFrame,
-            duration: EndFrame - 1 - StartFrame,
-            motionType: MotionType,
+            startFrame: null,
+            endFrame: null,
+            duration: null,
+            motionType: null,
             motionPARAMS: {
                 randomWalk_Range: 0,
             }
         }
+        console.log("motionDataを作成しました");
     }
 
     get motionPARAMS(){
@@ -40,5 +41,7 @@ export class MotionData {
                 this._data[key] = newData[key];//そのプロパティを更新する
             }
         }
+        console.log("motionDataの値が変更されました。");
+        console.log(this._data);
     }
 }

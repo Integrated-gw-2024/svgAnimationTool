@@ -1,16 +1,14 @@
 export class SVGfile {
-    svgArray;
-    fileName;
+    _data;
 
     constructor(svgArray, FileName) {
-        this.svgArray = svgArray;
-        this.fileName = FileName;
+        this._data = {
+            svgArray: svgArray,
+            fileName: FileName,
+        }
     }
 
-    getArray() {
-        return this.svgArray;
-    }
-    getName(){
-        return this,fileName;
+    get data() {
+        return this._data;
     }
 }
