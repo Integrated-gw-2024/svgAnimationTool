@@ -19,10 +19,8 @@ function motionUiSystem() {
         }
         //fileListでsvgデータが二つアップロードされたら
         if(svgFileLength == 2){
-            let startSvgData = fileList.getSvgData(0);
-            console.log(startSvgData);
-            let endSvgData = fileList.getSvgData(1);
-            console.log(endSvgData);
+            let startSvgData = fileList.getSvgData(0);//ここでsvgデータを取得している
+            let endSvgData = fileList.getSvgData(1);//ここでsvgデータを取得している
             //motionDataを追加
             motionManager.addMotionData(`${startSvgData.fileName} → ${endSvgData.fileName}`,startSvgData.svgArray , endSvgData.svgArray, 0,100,"");
         }
@@ -37,6 +35,10 @@ function motionUiSystem() {
         //timelineにmotionObjectを配置
         controlManager.addMotionObject(NewPARAMS.name);
     });
+    //motionObjectが選択された時
+    controlManager.event.add("motionObjectSelected", (selectedMotionObjectData) => {
+        console.log("現在は " + selectedMotionObjectData + " 個目のmotionObjectを選択中");
+    });
 
     /*ここから下はUI同士の連絡とかそういうものなので無視していいよ*/
     //motionObjectが追加し終わったら
@@ -48,10 +50,6 @@ function motionUiSystem() {
     controlManager.event.add("parameterChanged",(SelectedData,PARAMS) =>{
         //motionDataを変更する
         motionManager.updateMotionData(PARAMS, SelectedData);
-    });
-    //motionObjectが選択された時
-    controlManager.event.add("motionObjectSelected", (selectedMotionObjectData) => {
-        console.log("現在は " + selectedMotionObjectData + " 個目のmotionObjectを選択中");
     });
 }
 

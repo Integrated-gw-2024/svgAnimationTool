@@ -103,7 +103,6 @@ export class MotionObject {
     setData(newData) {
         for (let key in this._data) {//for...inでデータを順番に処理している
             if (newData.hasOwnProperty(key)) {//newDataにプロパティが設定してあれば
-                console.log(`motionObject_${this.objectNumber}の${key} を ` + this._data[key] + " から " + newData[key] + " に更新しましす");
                 this._data[key] = newData[key];//そのプロパティを更新する
             }
         }

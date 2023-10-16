@@ -45,7 +45,6 @@ export class TweakPaneManager {
     setData(newData) {
         for (let key in this.PARAMS) {//for...inでデータを順番に処理している
             if (newData.hasOwnProperty(key)) {//newDataにプロパティが設定してあれば
-                console.log(`tweakPaneの${key} を ` + this.PARAMS[key] + " から " + newData[key] + " に更新しましす");
                 this.PARAMS[key] = newData[key];//そのプロパティを更新する
             }
         }

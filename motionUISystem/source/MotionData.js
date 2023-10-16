@@ -37,11 +37,10 @@ export class MotionData {
     set data(newData) {
         for (let key in this._data) {//for...inでデータを順番に処理している
             if (newData.hasOwnProperty(key)) {//newDataにプロパティが設定してあれば
-                console.log(`${this._data.name}の${key} を ` + this._data[key] + " から " + newData[key] + " に更新しましす");
+                // console.log(`${this._data.name}の${key} を ` + this._data[key] + " から " + newData[key] + " に更新しましす");
                 this._data[key] = newData[key];//そのプロパティを更新する
             }
         }
         console.log("motionDataの値が変更されました。");
-        console.log(this._data);
     }
 }
