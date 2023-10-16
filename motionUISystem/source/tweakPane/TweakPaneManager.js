@@ -11,6 +11,7 @@ export class TweakPaneManager {
         this.pane.addBinding(this.PARAMS, 'motionType', {
             options: {
                 linear: 'linear',
+                radomWalk: 'randomWalk',
                 easeInSine: 'easeInSine',
                 easeOutSine: 'easeOutSine',
                 easeInOutSine: 'easeInOutSine',

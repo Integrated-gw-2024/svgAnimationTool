@@ -1,16 +1,21 @@
 import { MotionData } from "./MotionData";
 import { EventListener } from "./eventListener/eventListener";
 
+
+//このクラスは、motionのDataに関して管理するクラス
+
 export class MotionManager{
     motionData = [];
+
 
     constructor(){
         //イベントリスナーを設定
         this.event = new EventListener();
-        this.event.add("dataUpdated");
-        this.event.add("motionAdded");
+        this.event.add("dataUpdated");//データの更新が反映された時に発火
+        this.event.add("motionAdded");//motionDataが追加された時に発火
 
         this.addMotionData("test", "data1", "data2", 0,10,"testMotion");
+
     }
 
     //motionDataを追加する
@@ -20,8 +25,8 @@ export class MotionManager{
     }
 
     //motionDataを更新する
-    updateMotionData(MotionNum, MotionArray){
-        this.motionData[MotionNum].data = MotionArray;
+    updateMotionData(newData, targetMotionData){
+        this.motionData[targetMotionData].data = newData;//今選択中のmotionDataの_dataを変更する
         this.event.dispatch("dataUpdated");
     }
 

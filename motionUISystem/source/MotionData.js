@@ -12,40 +12,32 @@ export class MotionData {
 
     constructor(Name, StartSvgData, EndSvgData, StartFrame, EndFrame, MotionType) {
         //初期化
-        this.name = Name;
-        this.startSvgData = StartSvgData;
-        this.endSvgData = EndSvgData;
-        this.startFrame = StartFrame;
-        this.endFrame = EndFrame;
-        this.motionType = MotionType;
-        this.setInitMotionPARAMS();
-    }
-
-    setInitMotionPARAMS() {
-        this.motionPARAMS = {
-            randomWalk_Range: 0,
+        this._data = {
+            name: Name,
+            startSvgData: StartSvgData,
+            endSvgData: EndSvgData,
+            startFrame: StartFrame,
+            endFrame: EndFrame,
+            motionType: MotionType,
+            motionPARAMS: {
+                randomWalk_Range: 0,
+            }
         }
     }
+
     get motionPARAMS(){
-        return this.motionPARAMS;
+        return this._data.motionPARAMS;
     }
     get data(){
-        let data = {
-            name: this.name,
-            startSvgData: this.startSvgData,
-            endSvgData: this.endSvgData,
-            startFrame: this.startFrame,
-            endFrame: this.endFrame,
-            motionType: this.motionType,
-            motionPARAMS: this.motionPARAMS,
-        }
-        return data;
+        return this._data;
     }
 
-    set data(MotionArray) {
-        this.startFrame = MotionArray.startFrame;
-        this.endFrame = MotionArray.endFrame;
-        this.motionType = MotionArray.startSvgData;
-        console.log("新しい値にmotionDataを更新したよ");
+    set data(newData) {
+        for (let key in this._data) {//for...inでデータを順番に処理している
+            if (newData.hasOwnProperty(key)) {//newDataにプロパティが設定してあれば
+                console.log(`${key} を ` + this._data[key] + " から " + newData[key] + " に更新しましす");
+                this._data[key] = newData[key];//そのプロパティを更新する
+            }
+        }
     }
 }

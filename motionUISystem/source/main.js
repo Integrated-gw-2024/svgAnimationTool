@@ -17,8 +17,19 @@ function createUploadButton() {
     console.log(motionManager.getMotionData(0));
     console.log(motionManager.event);
 
-    this,tweakPaneManager.event.add("PARAMSInteracted", (PARAMS) => {
-        console.log(PARAMS);
+    
+    tweakPaneManager.event.add("PARAMSInteracted", (PARAMS) => {
     });
+    controlManager.event.add("motionObjectSelected", (selectedMotionObjectData) => {
+        console.log(selectedMotionObjectData);
+    });
+
+
+    let data = {
+        name: "aiuaiaiu",
+        startFrame: 10010,
+        endFrame: 109109,
+    }
+    motionManager.updateMotionData(data, 0);
 }
 
