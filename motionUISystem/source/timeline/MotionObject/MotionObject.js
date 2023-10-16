@@ -23,6 +23,7 @@ export class MotionObject {
     currentMouseX;
     mouseXDifference;
     frameRatio;
+    _data;
 
 
     constructor(ParentELement_id, ObjectNumber, ParentEvent) {
@@ -39,6 +40,14 @@ export class MotionObject {
         this.mouseXDifference = 0;
         this.frameRatio = 2;//実際のpxとフレーム数の比率を調整している。
 
+        //データの設定
+        this._data = {
+            startFrame: null,
+            endFrame: null,
+            duration: null,
+            motionType: "linear",
+        }
+
         //ここでこのMotionObjectのDOM要素を生成
         this.object_id = `motionObject_${this.objectNumber}`;
         this.object = new Element(this.parentELement_id, "id", this.object_id, "div");
@@ -48,6 +57,7 @@ export class MotionObject {
         this.initStyle();
         this.setClickEvent();
         this.setMargin(this.frameRatio);
+        this.updateData();
 
 
         //イベントの設定
@@ -63,11 +73,11 @@ export class MotionObject {
             document.documentElement.style.cursor = "auto";//カーソルの見た目を戻す
             this.mouseXDifference = this.floatToInt(this.currentMouseX - this.initMouseX);//最終的にframeRatioの倍数になる
             this.setObjectWidth(this.width + this.mouseXDifference);//初期値がframeRatioの倍数なら、新しいwidthもframeRatioの倍数
-            this.updateFrame();//start,end,durationを更新
-            this.textsElement.setText("duration", this.duration);
-            this.textsElement.setText("startFrame", this.startFrame);
-            this.textsElement.setText("endFrame", this.endFrame);
-            this.parentEvent.dispatch("motionObjectChanged");
+            this.updateData();//start,end,durationを更新
+            this.textsElement.setText("duration", this._data.duration);
+            this.textsElement.setText("startFrame", this._data.startFrame);
+            this.textsElement.setText("endFrame", this._data.endFrame);
+            this.parentEvent.dispatch("motionObjectChanged", this.data);//親クラスのeventを発火
         });
         this.event.add("moving", () => {
             this.currentMouseX = this.mouseX;
@@ -83,24 +93,26 @@ export class MotionObject {
 
         //テキストを作成
         this.textsElement = new TextsElement(this.object.getDOMElement(), "motionObject_textElement");
-        this.textsElement.setText("duration", this.duration);
-        this.textsElement.setText("startFrame", this.startFrame);
-        this.textsElement.setText("endFrame", this.endFrame);
+        this.textsElement.setText("duration", this._data.duration);
+        this.textsElement.setText("startFrame", this._data.startFrame);
+        this.textsElement.setText("endFrame", this._data.endFrame);
         //ハンドルを生成
         this.handleElement = new HandleElement(this.object.getDOMElement(), "endHandle", this.event);
     }
 
-    setMotionType(MotionType) {
-        this.textsElement.setText("motionType", MotionType);
-    }
-    setFrames(StartFrame, EndFrame) {
-        this.startFrame = StartFrame;
-        this.endFrame = EndFrame;
-        this.duration = (this.endFrame + 1) - this.startFrame;
-        this.width = (this.duration + this.frameRatio) * this.frameRatio;
-        this.textsElement.setText("duration", this.duration);
-        this.textsElement.setText("startFrame", this.startFrame);
-        this.textsElement.setText("endFrame", this.endFrame);
+    setData(newData) {
+        for (let key in this._data) {//for...inでデータを順番に処理している
+            if (newData.hasOwnProperty(key)) {//newDataにプロパティが設定してあれば
+                console.log(`motionObject_${this.objectNumber}の${key} を ` + this._data[key] + " から " + newData[key] + " に更新しましす");
+                this._data[key] = newData[key];//そのプロパティを更新する
+            }
+        }
+        this._data.duration = (this._data.endFrame + 1) - this._data.startFrame;
+        this.width = (this._data.duration + this.frameRatio) * this.frameRatio;
+        this.textsElement.setText("duration", this._data.duration);
+        this.textsElement.setText("startFrame", this._data.startFrame);
+        this.textsElement.setText("endFrame", this._data.endFrame);
+        this.textsElement.setText("motionType", this._data.motionType);
         this.setObjectWidth(this.width);
     }
 
@@ -157,24 +169,19 @@ export class MotionObject {
     }
 
 
-    updateFrame() {
+    updateData() {
         // div要素を取得
         let timeLineElement = document.getElementById("timeline");
         // div要素のバウンディングボックスを取得
         let ParentRect = timeLineElement.getBoundingClientRect();
         let MotionObjectRect = this.object.getDOMElement().getBoundingClientRect();
         // div要素の左端からのMotionObjectの相対X座標を計算
-        this.startFrame = (MotionObjectRect.left - ParentRect.left + timeLineElement.scrollLeft) / this.frameRatio;
-        this.endFrame = ((MotionObjectRect.right) - ParentRect.left + timeLineElement.scrollLeft) / this.frameRatio;
-        this.duration = (this.endFrame + 1) - this.startFrame;
+        this._data.startFrame = (MotionObjectRect.left - ParentRect.left + timeLineElement.scrollLeft) / this.frameRatio;
+        this._data.endFrame = ((MotionObjectRect.right) - ParentRect.left + timeLineElement.scrollLeft) / this.frameRatio;
+        this._data.duration = (this._data.endFrame + 1) - this._data.startFrame;
     }
 
-    get frames() {
-        let frames = {
-            startFrame: this.startFrame,
-            endFrame: this.endFrame,
-            duration: this.duration
-        }
-        return frames;
+    get data() {
+        return this._data;
     }
 }

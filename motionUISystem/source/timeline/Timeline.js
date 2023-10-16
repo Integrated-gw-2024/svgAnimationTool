@@ -27,8 +27,8 @@ export class Timeline {
             this.selectedObjectNumber = SelectedObjectNumber;
             this.allMotionObjectsResetSelect();
         });
-        this.event.add("motionObjectChanged");
-        this.event.add("framePointerMoved");
+        this.event.add("motionObjectChanged");//motionObjectの方でPARAMSを返している
+        this.event.add("framePointerMoved");//未実装
 
         //motionObjectContainerの作成
         this.motionObjectContainer_id = "motionObjectContainer";
@@ -44,14 +44,9 @@ export class Timeline {
     pushMotionObject() {
         this.motionObjects.push(new MotionObject(this.motionObjectContainer_id, this.motionObjects.length, this.event));
     }
-    //これでMotionTypeの表示を変更できるよ
-    setMotionType(MotionType){
-        if(this.selectedObjectNumber == undefined){return}
-        this.motionObjects[this.selectedObjectNumber].setMotionType(MotionType);
-    }
     //これでMotionObjectのframe関連を設定できるよ
-    setMotionObjectFrames(MotionObjectNum, StartFrame, EndFrame){
-        this.motionObjects[MotionObjectNum].setFrames(StartFrame, EndFrame);
+    setMotionObjectData(MotionObjectNum,PARAMS){
+        this.motionObjects[MotionObjectNum].setData(PARAMS);
     }
 
 
@@ -83,8 +78,11 @@ export class Timeline {
     getSelectedObjectNumber(){
         return this.selectedObjectNumber;
     }
-    getMotionObjectFrames(i){
-        return this.motionObjects[i].frames;
+    getMotionObjectData(i){
+        return this.motionObjects[i].data;
+    }
+    getMotionObjectLength(){
+        return this.motionObjects.length;
     }
     
 }
