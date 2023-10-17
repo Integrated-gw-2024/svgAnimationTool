@@ -82,6 +82,11 @@ export class MotionObject {
             this.currentMouseX = this.mouseX;
             let preEndFrame = (this.floatToInt(this.currentMouseX - this.initMouseX) + this.width) / this.frameRatio;
             this.textsElement.setText("endFrame", `${preEndFrame}`);
+            let preWidth =(preEndFrame +1 -this._data.startFrame) * this.frameRatio;
+            this.styles = {
+                width: `${preWidth}px`
+            };
+            this.object.setStyle(this.styles);
         });
         this.event.add("selected", () => {
             this.parentEvent.dispatch("motionObjectClicked", this.objectNumber);
@@ -107,7 +112,7 @@ export class MotionObject {
             }
         }
         this._data.duration = (this._data.endFrame + 1) - this._data.startFrame;
-        this.width = (this._data.duration + this.frameRatio) * this.frameRatio;
+        this.width = (this._data.duration + this.frameRatio) * this.frameRatio;//1フレーム分のピクセルを足してから倍率をかけている
         this.textsElement.setText("duration", this._data.duration);
         this.textsElement.setText("startFrame", this._data.startFrame);
         this.textsElement.setText("endFrame", this._data.endFrame);
@@ -129,6 +134,7 @@ export class MotionObject {
         this.styles = {
             width: `${this.width}px`
         };
+        console.log(this.width);
         this.object.setStyle(this.styles);
     }
 
