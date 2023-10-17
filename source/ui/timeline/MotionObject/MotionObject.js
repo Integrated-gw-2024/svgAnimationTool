@@ -81,9 +81,10 @@ export class MotionObject {
         });
         this.event.add("moving", () => {
             this.currentMouseX = this.mouseX;
-            let preEndFrame = (this.floatToInt(this.currentMouseX - this.initMouseX) + this.width) / this.frameRatio;
+            let preEndFrame = (this.floatToInt(this.currentMouseX - this.initMouseX) + this.width) / this.frameRatio + this._data.startFrame;
             this.textsElement.setText("endFrame", `${preEndFrame}`);
             let preWidth =(preEndFrame +1 -this._data.startFrame) * this.frameRatio;
+            console.log(preEndFrame);
             this.styles = {
                 width: `${preWidth}px`
             };
