@@ -1,0 +1,53 @@
+*{
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100vh;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+#other_timeline {
+  background-color: gray;
+  position: absolute;
+  display: flex;
+  height: 68%;
+  width: 100%;
+}
+
+#file_list {
+  background-color: black;
+  width: 210px;
+  height: 100%;
+  overflow: scroll;
+  /*スクロールバー非表示（IE・Edge）*/
+  -ms-overflow-style: none;
+  /*スクロールバー非表示（Firefox）*/
+  scrollbar-width: none;
+}
+
+#file_list::-webkit-scrollbar{
+  display:none;
+}
+
+#canvas_wrapper {
+  background-color: brown;
+  position: relative;
+  width: 100%;
+  max-width: calc(100% - 210px);
+  height: 100%;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+#canvas_size {
+  position: absolute;
+  width: 90%;
+  height: 90%;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
