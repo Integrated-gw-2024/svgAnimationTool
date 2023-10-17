@@ -15,6 +15,7 @@ export class MotionObject {
     endFrame;
     duration;
     isSelect;
+    isHover;
     textsElement;
     handleElement;
     parentEvent;
@@ -93,6 +94,14 @@ export class MotionObject {
             this.setIsSelected(true);
             this.setSelectStyle(true);
         });
+        this.object.getDOMElement().addEventListener("mouseenter", (ev) => {
+            this.isHover = true;
+            this.textsElement.setTextStyle(this.isHover);
+        });
+        this.object.getDOMElement().addEventListener("mouseleave", (ev) => {
+            this.isHover = false;
+            this.textsElement.setTextStyle(this.isHover);
+        });
 
 
         //テキストを作成
@@ -134,7 +143,6 @@ export class MotionObject {
         this.styles = {
             width: `${this.width}px`
         };
-        console.log(this.width);
         this.object.setStyle(this.styles);
     }
 

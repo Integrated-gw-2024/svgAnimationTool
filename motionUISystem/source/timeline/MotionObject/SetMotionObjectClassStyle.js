@@ -8,7 +8,7 @@ export class SetMotionObjectClassStyle{
     createMotionObjectStyle(){
         let motionObject_baseStyles = `
         .motionObject_baseStyle{
-            height: 15vh;
+            height: 20vh;
             flex-shrink: 0;
             display: grid;
             grid-template-columns: 1fr 15px;
@@ -19,7 +19,7 @@ export class SetMotionObjectClassStyle{
         let motionObject_baseStyle = new Style(motionObject_baseStyles);
         let normalStyles = `
         .motionObject_hoverStyle{
-            background-color: #555555;
+            background-color: #222222;
         }`;
         let normalStyle = new Style(normalStyles);
         let hoverStyles = `

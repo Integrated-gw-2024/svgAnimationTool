@@ -16,10 +16,10 @@ export class MotionObjectContainer {
 
     setContainerStyle() {
         this.styles = {
-            height: "15vh",
+            height: "20vh",
             display: "flex",
             flexDirection: "row",
-            marginTop: "7vh",
+            marginTop: "5vh",
             marginRight: "30vw"
         };
         this.motionContainer.setStyle(this.styles);

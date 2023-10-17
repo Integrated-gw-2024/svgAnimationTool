@@ -28,7 +28,7 @@ export class HandleElement {
             height: '100%',
             boxShadow: "0px 0px 7px #222222",
             borderRadius: "3px",
-            backgroundColor: "#000000",
+            backgroundColor: "#FFFFFF",
             cursor: "col-resize",
         };
         this.handle.setStyle(this.styles);
