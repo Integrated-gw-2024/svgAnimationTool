@@ -20,7 +20,7 @@ export class MotionObjectContainer {
             display: "flex",
             flexDirection: "row",
             marginTop: "5vh",
-            marginRight: "30vw"
+            marginRight: "70vw"
         };
         this.motionContainer.setStyle(this.styles);
     }

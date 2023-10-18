@@ -1,4 +1,4 @@
-*{
+* {
   margin: 0;
   padding: 0;
   border: 0;
@@ -7,8 +7,12 @@
   vertical-align: baseline;
 }
 
+body {
+  background-color: whitesmoke;
+}
+
 #other_timeline {
-  background-color: gray;
+  background-color: whitesmoke;
   position: absolute;
   display: flex;
   height: 68%;
@@ -16,7 +20,7 @@
 }
 
 #file_list {
-  background-color: black;
+  background-color: whitesmoke;
   width: 210px;
   height: 100%;
   overflow: scroll;
@@ -26,28 +30,32 @@
   scrollbar-width: none;
 }
 
-#file_list::-webkit-scrollbar{
-  display:none;
+#file_list::-webkit-scrollbar {
+  display: none;
 }
 
 #canvas_wrapper {
-  background-color: brown;
+  background-color: whitesmoke;
   position: relative;
-  width: 100%;
-  max-width: calc(100% - 210px);
+  width: 80%;
+  max-width: calc(80% - 210px);
   height: 100%;
-
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #canvas_size {
   position: absolute;
   width: 90%;
   height: 90%;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  display:flex;
-  justify-content:center;
-  align-items:center;
+.p5Canvas{
+  box-sizing: border-box;
+  box-shadow: 0px 0px 10px #000000;
 }
