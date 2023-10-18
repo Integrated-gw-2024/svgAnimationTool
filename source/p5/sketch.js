@@ -108,7 +108,7 @@ export const sketch = (p5) => {
             new Tween(entity.components.position.originalY, endSvgData.position.y, 50, tweenAnime.Easing.easeOutCubic)
           );
           entity.components.shape.timeline.radius.addMotion(
-            new Tween(entity.components.shape.radius * 2, endSvgData.radius * 2, 50, tweenAnime.Easing.easeOutCubic)
+            new Tween(entity.components.shape.originalRadius, endSvgData.radius * 2, 50, tweenAnime.Easing.easeOutCubic)
           );
           count++;
           countEnd++;
@@ -128,7 +128,7 @@ export const sketch = (p5) => {
             new Tween(entity.components.position.originalY, endSvgData.position.y, 50, tweenAnime.Easing.easeOutCubic)
           );
           entity.components.shape.timeline.radius.addMotion(
-            new Tween(entity.components.shape.radius * 2, endSvgData.radius * 2, 50, tweenAnime.Easing.easeOutCubic)
+            new Tween(entity.components.shape.originalRadius, endSvgData.radius * 2, 50, tweenAnime.Easing.easeOutCubic)
           );
           count++;
           countEnd++;
@@ -147,7 +147,7 @@ export const sketch = (p5) => {
             new Tween(entity.components.position.originalY, svgData.position.y, 50, tweenAnime.Easing.easeOutCubic)
           );
           entity.components.shape.timeline.radius.addMotion(
-            new Tween(entity.components.shape.radius * 2, svgData.radius * 2, 50, tweenAnime.Easing.easeOutCubic)
+            new Tween(entity.components.shape.originalRadius, svgData.radius * 2, 50, tweenAnime.Easing.easeOutCubic)
           );
           count++;
           if (count >= NewPARAMS.startSvgData.length) count = 0;

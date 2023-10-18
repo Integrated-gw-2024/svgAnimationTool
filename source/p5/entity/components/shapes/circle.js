@@ -44,4 +44,8 @@ export class Circle extends Shape {
       this.#radius = this.#originalRadius * this.systems.canvas.scaleCanvasSize;
     }
   }
+
+  get originalRadius() {
+    return this.#originalRadius;
+  }
 }
