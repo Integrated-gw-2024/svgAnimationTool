@@ -33,7 +33,7 @@ export class MotionObject {
         this.objectNumber = ObjectNumber;
         this.parentEvent = ParentEvent;
 
-        this.width = 300;
+        this.width = 160;
         this.isSelected = false;
         this.mouseX = 0;
         this.initMouseX = 0;
@@ -48,6 +48,9 @@ export class MotionObject {
             endFrame: null,
             duration: null,
             motionType: "linear",
+            motionPARAMS: {
+                randomWalk_Range: 15,
+            }
         }
 
         //ここでこのMotionObjectのDOM要素を生成

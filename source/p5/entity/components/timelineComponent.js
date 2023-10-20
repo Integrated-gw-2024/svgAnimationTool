@@ -20,6 +20,10 @@ export class TimelineComponent extends Component {
     this.components.event.timeline.dispatch('setMotionParameter', motionIndex, whole, easing)
   }
 
+  setMotion(motionIndex, motion) {
+    this.components.event.timeline.dispatch('setMotion', motionIndex, motion);
+  }
+
   reset() {
     this.components.event.timeline.dispatch('reset');
   }

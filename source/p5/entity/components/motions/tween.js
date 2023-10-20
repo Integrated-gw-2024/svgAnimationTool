@@ -6,7 +6,13 @@ export class Tween extends Motion {
   tween;
 
   constructor(froms, tos, frames, easing = TweenAnime.Easing.linear) {
-    super(froms);
+    super(frames);
+
+    this.from = froms;
+    this.to = tos;
+    this.frames = frames;
+    this.easing = easing;
+
     this.motionTimeline.whole = frames;
     this.motionTimeline.current = 0;
     this.tween = new TweenAnime.FrameTween(froms, tos, frames, easing);

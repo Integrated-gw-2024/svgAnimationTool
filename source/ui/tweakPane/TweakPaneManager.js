@@ -10,6 +10,9 @@ export class TweakPaneManager {
         this.PARAMS = {
             motionType: 'linear',
             endFrame: 100,
+            motionPARAMS: {
+                randomWalk_Range: 15,
+            },
         };
         this.pane = new Pane();
 
@@ -18,7 +21,7 @@ export class TweakPaneManager {
         this.event.add("PARAMSRefreshed");//外部からPARAMSをセットした瞬間に発火
         this.event.add("PARAMSInteracted");//Paneを操作し終わった瞬間
 
-        this.pane.on('change', () => {
+        this.pane.on('change', (event) => {
             this.event.dispatch("PARAMSInteracted", this.PARAMS);
         });
     }
@@ -59,6 +62,24 @@ export class TweakPaneManager {
                 easeOutBounce: 'easeOutBounce',
                 easeInOutBounce: 'easeInOutBounce',
             },
+        }).on('change', (event) => {
+            if (event.value == 'randomWalk') {
+                const randomWalkPane = this.pane.addBinding(
+                    this.PARAMS.motionPARAMS,
+                    'randomWalk_Range', {
+                        min: 0,
+                        max: 200,
+                    }
+                );
+
+                this.event.add('disposeRandomWalk', () => {
+                    randomWalkPane.dispose();
+                })
+            } else {
+                try {
+                    this.event.dispatch('disposeRandomWalk');
+                } catch {}
+            }
         });
         this.pane.addBinding(this.PARAMS, 'endFrame');
         this.isAppear = true;

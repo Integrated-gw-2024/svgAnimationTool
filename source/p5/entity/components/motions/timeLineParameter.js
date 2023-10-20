@@ -5,7 +5,7 @@ export class TimelineParameter {
   #systems;
   #components;
 
-  #motions;
+  motions;
   #indexCurrent;
   indexShift;
   loopMode;
@@ -14,7 +14,7 @@ export class TimelineParameter {
     this.#component = component;
     this.#reflectKey = reflectKey;
 
-    this.#motions = [];
+    this.motions = [];
     this.#indexCurrent = 0;
 
     this.indexShift = 0;
@@ -30,16 +30,25 @@ export class TimelineParameter {
     this.#components.event.timeline.add(
       'setMotionParameter',
       (motionIndex, whole, easing) => {
-        if (motionIndex >= this.#motions.length) return;
+        if (motionIndex >= this.motions.length) return;
         if (whole != undefined) {
-          this.#motions[motionIndex + this.indexShift].whole = whole;
+          this.motions[motionIndex + this.indexShift].whole = whole;
         }
         if (easing != undefined) {
-          this.#motions[motionIndex + this.indexShift].tween.easing = easing;
+          this.motions[motionIndex + this.indexShift].tween.easing = easing;
         }
       },
       this
     );
+
+    this.#components.event.timeline.add(
+      'setMotion',
+      (motionIndex, motion) => {
+        if (motionIndex >= this.motions.length) return;
+        this.motions[motionIndex+ this.indexShift] = motion;
+      },
+      this
+    )
 
     this.#components.event.timeline.add(
       'reset',
@@ -60,29 +69,35 @@ export class TimelineParameter {
 
   addMotion(motion) {
     motion.setup(this.#component, this.#reflectKey);
-    this.#motions.push(motion);
+    this.motions.push(motion);
+  }
+
+  changeMotion(motionIndex, motion) {
+    motion.setup(this.#component, this.#reflectKey);
+    this.motions[motionIndex] = motion;
   }
 
   update() {
-    if (this.#motions.length <= 0) return;
-    if (this.#indexCurrent >= this.#motions.length) return;
-    if (this.#motions[this.#indexCurrent].isComplete()) this.#indexCurrent++;
-    if (this.#indexCurrent >= this.#motions.length) {
+    if (this.motions.length <= 0) return;
+    if (this.#indexCurrent >= this.motions.length) return;
+    if (this.motions[this.#indexCurrent].isComplete()) this.#indexCurrent++;
+    if (this.#indexCurrent >= this.motions.length) {
       if (this.loopMode == true) this.reset();
       return
     }
 
-    this.#motions[this.#indexCurrent].update();
+    this.motions[this.#indexCurrent].update();
   }
 
   dispose() {
     this.#components.event.timeline.remove('setMotionParameter', this);
+    this.#components.event.timeline.remove('setMotion', this);
     this.#components.event.timeline.remove('reset', this);
   }
 
   reset() {
     this.#indexCurrent = 0;
-    for (const motion of this.#motions) {
+    for (const motion of this.motions) {
       motion.reset();
     }
   }
