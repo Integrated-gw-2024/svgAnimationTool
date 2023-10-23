@@ -46,7 +46,7 @@ export class TextsElement {
     }
 
     initText() {
-        this.setText("motionType", "focus");
+        this.setText("motionType", "linear");
     }
     setText(TextType, Text) {
         this.textElements[TextType].getDOMElement().textContent = null;
