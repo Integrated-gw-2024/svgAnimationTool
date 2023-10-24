@@ -101,7 +101,7 @@ export const sketch = (p5) => {
               entity.components.position.timeline.x.motions[updatedMotionDataNum].from,
               entity.components.position.timeline.x.motions[updatedMotionDataNum].to,
               PARAMS.duration,
-              tweenAnime.Easing.easeOutCubic,
+              tweenAnime.Easing.easeOutSine,
               PARAMS.motionPARAMS.randomWalk_Range
             )
           );
@@ -112,7 +112,7 @@ export const sketch = (p5) => {
               entity.components.position.timeline.y.motions[updatedMotionDataNum].from,
               entity.components.position.timeline.y.motions[updatedMotionDataNum].to,
               PARAMS.duration,
-              tweenAnime.Easing.easeOutCubic,
+              tweenAnime.Easing.easeOutSine,
               PARAMS.motionPARAMS.randomWalk_Range
             )
           );

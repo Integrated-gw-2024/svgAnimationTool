@@ -15,13 +15,13 @@ export class RandomWalk extends Motion {
     this.frames = frames;
     this.easing = easing;
 
-    this.homingEasingFrame = 80;
+    this.homingEasingFrame = 20;
     if (this.frames < this.homingEasingFrame) {
       this.homingEasingFrame = this.frames / 2
     }
 
     const randomMove = new RandomMove(from, to, frames - this.homingEasingFrame, swingRange, TweenAnime.Easing.easeInOutQuad);
-    this.tween = new HomingToRandomMove(easing, 80, randomMove);
+    this.tween = new HomingToRandomMove(easing, this.homingEasingFrame, randomMove);
   }
 
   reset() {
