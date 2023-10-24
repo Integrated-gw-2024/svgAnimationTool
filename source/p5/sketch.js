@@ -258,7 +258,7 @@ export const sketch = (p5) => {
   };
 
   p5.draw = () => {
-    p5.background(0);
+    p5.background(0, 255, 0);
     world.update();
     world.display();
     if (world.entities.size > 0) {
