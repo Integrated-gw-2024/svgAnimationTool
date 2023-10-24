@@ -1,10 +1,20 @@
 import { Pane } from "../tweakpane-4.0.1/tweakpane-4.0.1";
 import { EventListener } from "../eventListener/eventListener";
 
-export class TweakPaneManager {
+export class ParameterPanelManager {
     isAppear;//boolean型で、paneが表示されているかどうかを示している。
 
     constructor() {
+        //イベントリスナーの設定
+        this.event = new EventListener();
+        this.event.add("PARAMSRefreshed");//外部からPARAMSをセットした瞬間に発火
+        this.event.add("PARAMSInteracted");//Paneを操作し終わった瞬間
+
+        this.pane = new Pane();
+        this.pane.on('change', (event) => {
+            this.event.dispatch("PARAMSInteracted", this.PARAMS);
+        });
+
         this.isAppear = false;
 
         this.PARAMS = {
@@ -14,16 +24,6 @@ export class TweakPaneManager {
                 randomWalk_Range: 15,
             },
         };
-        this.pane = new Pane();
-
-        //イベントリスナーの設定
-        this.event = new EventListener();
-        this.event.add("PARAMSRefreshed");//外部からPARAMSをセットした瞬間に発火
-        this.event.add("PARAMSInteracted");//Paneを操作し終わった瞬間
-
-        this.pane.on('change', (event) => {
-            this.event.dispatch("PARAMSInteracted", this.PARAMS);
-        });
     }
 
     addBindings(){
