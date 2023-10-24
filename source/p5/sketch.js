@@ -45,6 +45,7 @@ export const sketch = (p5) => {
           world.addEntity(entity);
         }
 
+        //ボールの数を数えるのに使ってるから消さないで！！！
         console.log(world.systems.event.timeline);
       }
       //fileListでsvgデータが二つアップロードされたら
