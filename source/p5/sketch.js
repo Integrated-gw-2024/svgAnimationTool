@@ -45,6 +45,7 @@ export const sketch = (p5) => {
           world.addEntity(entity);
         }
 
+        //ボールの数を数えるのに使ってるから消さないで！！！
         console.log(world.systems.event.timeline);
       }
       //fileListでsvgデータが二つアップロードされたら
@@ -101,7 +102,7 @@ export const sketch = (p5) => {
               entity.components.position.timeline.x.motions[updatedMotionDataNum].from,
               entity.components.position.timeline.x.motions[updatedMotionDataNum].to,
               PARAMS.duration,
-              tweenAnime.Easing.easeOutCubic,
+              tweenAnime.Easing.easeOutSine,
               PARAMS.motionPARAMS.randomWalk_Range
             )
           );
@@ -112,7 +113,7 @@ export const sketch = (p5) => {
               entity.components.position.timeline.y.motions[updatedMotionDataNum].from,
               entity.components.position.timeline.y.motions[updatedMotionDataNum].to,
               PARAMS.duration,
-              tweenAnime.Easing.easeOutCubic,
+              tweenAnime.Easing.easeOutSine,
               PARAMS.motionPARAMS.randomWalk_Range
             )
           );
