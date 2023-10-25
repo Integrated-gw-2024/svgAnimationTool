@@ -23,6 +23,10 @@ export class TimelineParameter {
 
   setup(systems) {
     this.#systems = systems;
+
+    this.#systems.event.timeline.add(
+      'complete',
+    )
   }
 
   setupComponents(components) {
@@ -82,6 +86,7 @@ export class TimelineParameter {
     if (this.#indexCurrent >= this.motions.length) return;
     if (this.motions[this.#indexCurrent].isComplete()) this.#indexCurrent++;
     if (this.#indexCurrent >= this.motions.length) {
+      this.#systems.event.timeline.dispatch('complete');
       if (this.loopMode == true) this.reset();
       return
     }
@@ -93,6 +98,7 @@ export class TimelineParameter {
     this.#components.event.timeline.remove('setMotionParameter', this);
     this.#components.event.timeline.remove('setMotion', this);
     this.#components.event.timeline.remove('reset', this);
+    this.#systems.event.timeline.remove('complete',this);
   }
 
   reset() {

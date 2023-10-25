@@ -55,6 +55,26 @@ body {
   align-items: center;
 }
 
+#render_progress {
+  position: fixed;
+  width: 300px;
+  height: 80px;
+  border-radius: 5px;
+  bottom: 20px;
+  right: 20px;
+  background-color: rgb(27, 27, 27);
+  z-index: 1;
+
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+#render_progress_value {
+  color: white;
+  font-weight: bold;
+}
+
 .p5Canvas{
   box-sizing: border-box;
   box-shadow: 0px 0px 10px #000000;

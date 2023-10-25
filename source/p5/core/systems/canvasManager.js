@@ -58,7 +58,7 @@ export class CanvasManager extends System {
       );
     } else {
       this.p5.resizeCanvas(
-        this.#adjustSizeElement.clientHeight,
+        this.#adjustSizeElement.clientWidth,
         this.#adjustSizeElement.clientHeight
       );
     }

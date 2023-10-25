@@ -10,6 +10,8 @@ import { Tween } from "./entity/components/motions/tween";
 import { RandomWalk } from "./entity/components/motions/randomWalk";
 import * as tweenAnime from "../lib/tweenAnime/tweenAnime";
 
+import { CanvasCapture } from 'canvas-capture';
+
 export const sketch = (p5) => {
   let motionManager;
   let controlManager;
@@ -23,6 +25,12 @@ export const sketch = (p5) => {
 
     world = new World(p5);
     world.systems.canvas.adjustSizeElement = document.querySelector("#canvas_size");
+
+    CanvasCapture.init(
+      document.getElementById('defaultCanvas0'),
+      { showRecDot: true }, // Options are optional, more info below.
+    );
+
 
     fileList.event.add("svgFileAdded", (svgFileLength) => {
       if (svgFileLength == 1) {
@@ -254,11 +262,84 @@ export const sketch = (p5) => {
       if (event.code == "Space") {
         world.systems.timeline.reset();
       }
+
+      if (event.code == "KeyP") {
+        world.systems.timeline.reset();
+
+        document.querySelector("#canvas_size").style.position = "fixed";
+        document.querySelector("#canvas_size").style.width = fileList.analyzer.svgViewSize.width + "px";
+        document.querySelector("#canvas_size").style.height = fileList.analyzer.svgViewSize.height + "px";
+        world.systems.canvas.resize();
+
+        document.querySelector("#render_progress").style.display = "flex";
+
+        CanvasCapture.beginPNGFramesRecord({
+          onExportProgress: (progress) => { // Options are optional, more info below.
+            //console.log(`Zipping... ${Math.round(progress * 100)}% complete.`);
+            document.querySelector("#render_progress_value").innerHTML = `rendering... ${Math.round(progress * 100)}% complete.`
+          },
+          fps: 60,
+          name:'pngFrames',
+          onExportFinish: () => {
+            setTimeout(() => {
+              document.querySelector("#render_progress_value").innerHTML = `rendering... 0% complete.`
+              document.querySelector("#render_progress").style.display = "none"
+            }, 1200);
+          }
+        })
+
+        world.systems.event.timeline.once('complete', () => {
+          CanvasCapture.stopRecord();
+          document.querySelector("#canvas_size").style.position = "absolute";
+          document.querySelector("#canvas_size").style.width = "90%";
+          document.querySelector("#canvas_size").style.height = "90%";
+          world.systems.canvas.resize();
+        });
+      }
+
+      if (event.code == "KeyG") {
+        world.systems.timeline.reset();
+
+        document.querySelector("#canvas_size").style.position = "fixed";
+        document.querySelector("#canvas_size").style.width = fileList.analyzer.svgViewSize.width + "px";
+        document.querySelector("#canvas_size").style.height = fileList.analyzer.svgViewSize.height + "px";
+        world.systems.canvas.resize();
+
+        document.querySelector("#render_progress").style.display = "flex";
+
+        CanvasCapture.beginGIFRecord({
+          onExportProgress: (progress) => { // Options are optional, more info below.
+            //console.log(`Zipping... ${Math.round(progress * 100)}% complete.`);
+            document.querySelector("#render_progress_value").innerHTML = `rendering... ${Math.round(progress * 100)}% complete.`
+          },
+          fps: 60,
+          name:'GIFAnimation',
+          quality: 0.6,
+          onExportFinish: () => {
+            setTimeout(() => {
+              document.querySelector("#render_progress_value").innerHTML = `rendering... 0% complete.`
+              document.querySelector("#render_progress").style.display = "none"
+            }, 1200);
+          }
+        })
+
+        world.systems.event.timeline.once('complete', () => {
+          CanvasCapture.stopRecord();
+          document.querySelector("#canvas_size").style.position = "absolute";
+          document.querySelector("#canvas_size").style.width = "90%";
+          document.querySelector("#canvas_size").style.height = "90%";
+          world.systems.canvas.resize();
+        });
+      }
+      
     });
   };
 
   p5.draw = () => {
     p5.background(0, 255, 0);
+    if (CanvasCapture.isRecording()) {
+      p5.clear();
+    }
     world.update();
     world.display();
     if (world.entities.size > 0) {
@@ -266,6 +347,10 @@ export const sketch = (p5) => {
         //console.log(entity[1].components.position.timeline.x);
         break;
       }
+    }
+
+    if (CanvasCapture.isRecording()) {
+      CanvasCapture.recordFrame();
     }
   };
 };
