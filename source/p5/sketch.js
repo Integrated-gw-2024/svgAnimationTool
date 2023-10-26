@@ -15,6 +15,7 @@ import { CanvasCapture } from 'canvas-capture';
 export const sketch = (p5) => {
   let motionManager;
   let controlManager;
+  let background;
   let fileList;
   let world;
 
@@ -26,11 +27,12 @@ export const sketch = (p5) => {
     world = new World(p5);
     world.systems.canvas.adjustSizeElement = document.querySelector("#canvas_size");
 
+    background = new BackgroundColor(p5, 0, 255, 0, "color");
+
     CanvasCapture.init(
       document.getElementById('defaultCanvas0'),
       { showRecDot: true }, // Options are optional, more info below.
     );
-
 
     fileList.event.add("svgFileAdded", (svgFileLength) => {
       if (svgFileLength == 1) {
@@ -264,6 +266,7 @@ export const sketch = (p5) => {
       }
 
       if (event.code == "KeyP") {
+        background.setMode("clear");
         world.systems.timeline.reset();
 
         document.querySelector("#canvas_size").style.position = "fixed";
@@ -293,6 +296,7 @@ export const sketch = (p5) => {
           document.querySelector("#canvas_size").style.position = "absolute";
           document.querySelector("#canvas_size").style.width = "90%";
           document.querySelector("#canvas_size").style.height = "90%";
+          background.setMode("color");
           world.systems.canvas.resize();
         });
       }
@@ -337,9 +341,7 @@ export const sketch = (p5) => {
 
   p5.draw = () => {
     p5.background(0, 255, 0);
-    if (CanvasCapture.isRecording()) {
-      p5.clear();
-    }
+    background.display();
     world.update();
     world.display();
     if (world.entities.size > 0) {
@@ -354,3 +356,41 @@ export const sketch = (p5) => {
     }
   };
 };
+
+class BackgroundColor {
+  #p5;
+  #mode;
+  R;
+  G;
+  B;
+
+  constructor(p5, red, green, blue, mode = "clear") {
+    this.#p5 = p5;
+
+    this.R = red;
+    this.G = green;
+    this.B = blue;
+    this.#mode = mode;
+  }
+
+  setColor(red, green, blue) {
+    this.R = red;
+    this.G = green;
+    this.B = blue;
+  }
+
+  setMode(mode) {
+    if (mode != "clear" && mode != "color") {
+      throw new Error("modeに登録出来ない文字列です。'clear',もしくは'color'を入力してください。");
+    }
+
+    this.#mode = mode;
+  }
+
+  display() {
+    if(this.#mode == "clear") this.#p5.clear();
+    if(this.#mode == "color") this.#p5.background(this.R, this.G, this.B);
+  }
+
+
+}
